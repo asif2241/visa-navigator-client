@@ -9,28 +9,28 @@ const Navbar = () => {
         to={"/"}
         className={({ isActive }) =>
           isActive
-            ? "btn   font-semibold text-lg  bg-white text-green-400 mr-2"
-            : "mr-2 btn bg-transparent r font-semibold text-lg"
+            ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
+            : "mr-2  bg-transparent r font-semibold text-lg"
         }
       >
         Home
       </NavLink>
       <NavLink
-        to={"/"}
+        to={"/add_visa"}
         className={({ isActive }) =>
           isActive
-            ? "btn   font-semibold text-lg  bg-white text-green-400 mr-2"
-            : "mr-2 btn bg-transparent r font-semibold text-lg"
+            ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
+            : "mr-2  bg-transparent r font-semibold text-lg"
         }
       >
-        Home
+        Add Visa
       </NavLink>
       <NavLink
         to={"/"}
         className={({ isActive }) =>
           isActive
-            ? "btn   font-semibold text-lg  bg-white text-green-400 mr-2"
-            : "mr-2 btn bg-transparent r font-semibold text-lg"
+            ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
+            : "mr-2  bg-transparent r font-semibold text-lg"
         }
       >
         Home
@@ -66,7 +66,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <img className="w-30" src={logopng} alt="" />
+          <img className="w-25" src={logopng} alt="" />
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
