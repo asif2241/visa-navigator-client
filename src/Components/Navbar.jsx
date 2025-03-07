@@ -16,6 +16,16 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
+        to={"/all_visa"}
+        className={({ isActive }) =>
+          isActive
+            ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
+            : "mr-2  bg-transparent r font-semibold text-lg"
+        }
+      >
+        All Visa
+      </NavLink>
+      <NavLink
         to={"/add_visa"}
         className={({ isActive }) =>
           isActive
@@ -24,16 +34,6 @@ const Navbar = () => {
         }
       >
         Add Visa
-      </NavLink>
-      <NavLink
-        to={"/"}
-        className={({ isActive }) =>
-          isActive
-            ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
-            : "mr-2  bg-transparent r font-semibold text-lg"
-        }
-      >
-        Home
       </NavLink>
     </>
   );

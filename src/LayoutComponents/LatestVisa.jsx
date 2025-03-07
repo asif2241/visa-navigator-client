@@ -35,9 +35,9 @@ const LatestVisa = () => {
           key={visa._id}
           className="card bg-base-100 shadow-sm max-w-[490px]"
         >
-          <figure className="pt-5">
+          <figure className="p-5">
             <img
-              className="lg:w-96 md:w-80 h-80 md:h-72 object-cover rounded-xl"
+              className="w-full  object-cover rounded-xl"
               src={visa.countryImg}
               alt="Shoes"
             />
