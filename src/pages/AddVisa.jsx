@@ -19,23 +19,39 @@ const AddVisa = () => {
     const form = e.target;
     const countryImg = form.countryImg.value;
     const countryName = form.countryName.value;
+    const visaType = form.visaType.value;
     const processingTime = form.processingTime.value;
     const ageRestriction = form.ageRestriction.value;
     const fee = form.fee.value;
     const validity = form.validity.value;
     const applicationMethod = form.applicationMethod.value;
     const description = form.description.value;
-    console.log(
+    const required_docs = requiredDocs;
+    const addedVisa = {
       countryImg,
       countryName,
+      visaType,
       processingTime,
       ageRestriction,
       fee,
       validity,
       applicationMethod,
       description,
-      requiredDocs
-    );
+      required_docs,
+    };
+    console.log(addedVisa);
+
+    fetch("http://localhost:5000/visa", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addedVisa),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
   return (
     <div>
@@ -56,7 +72,10 @@ const AddVisa = () => {
             placeholder="Country Name"
             className="input input-xl w-full"
           />
-          <select className="input input-xl w-full text-gray-400">
+          <select
+            name="visaType"
+            className="input input-xl w-full text-gray-400"
+          >
             <option value="">Visa Type...</option> {/* Acts as a placeholder */}
             <option value="Tourist">Tourist</option>
             <option value="Student">Student</option>
@@ -89,23 +108,24 @@ const AddVisa = () => {
             placeholder="Validity"
             className="input input-xl w-full"
           />
-          <input
+          <select
             name="applicationMethod"
-            type="text"
-            placeholder="Application Method"
-            className="input input-xl w-full"
-          />
+            className="input input-xl w-full text-gray-400"
+          >
+            <option value="">Application Method...</option>{" "}
+            {/* Acts as a placeholder */}
+            <option value="Online">Online</option>
+            <option value="Offline">Offline</option>
+            <option value="Both Online And Offline">
+              Both Online And Offline
+            </option>
+          </select>
           <textarea
             name="description"
             className="textarea col-span-2 w-full"
             placeholder="Description"
           ></textarea>
 
-          <input
-            className="btn w-full col-span-2"
-            type="submit"
-            value="Submit"
-          />
           <div className="text-gray-500">
             <p className="text-2xl  font-medium my-2 ">Required Documents</p>
             {[
@@ -128,6 +148,11 @@ const AddVisa = () => {
               </div>
             ))}
           </div>
+          <input
+            className="btn w-full col-span-2"
+            type="submit"
+            value="Submit"
+          />
         </form>
       </div>
     </div>
