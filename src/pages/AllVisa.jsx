@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const AllVisa = () => {
   const allVisa = useLoaderData();
@@ -30,9 +30,12 @@ const AllVisa = () => {
             </h2>
 
             <div className="card-actions justify-end">
-              <button className="btn btn-primary font-light">
+              <Link
+                to={`/visa_details/${visa._id}`}
+                className="btn btn-primary font-light"
+              >
                 See Details
-              </button>
+              </Link>
             </div>
           </div>
         </div>
