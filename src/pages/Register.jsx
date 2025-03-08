@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Components/Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+  const { createNewUser, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [errorMessage, setErrormessage] = useState("");
   const [success, setSuccess] = useState(false);
@@ -23,7 +26,7 @@ const Register = () => {
   // }, [success]);
   // Runs only when `success` updates
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const name = form.get("name");
@@ -54,6 +57,27 @@ const Register = () => {
     //   setErrormessage("The Password Must Contain Atleast 6 Letters");
     //   return
     // }
+
+    try {
+      // Create user
+      const res = await createNewUser(email, password);
+      const user = res.user;
+
+      // Update user profile with name and photoURL
+      await updateProfile(user, {
+        displayName: name,
+        photoURL: photo,
+      });
+
+      // Successfully updated user profile
+      setUser({ ...user, displayName: name, photoURL: photo });
+      console.log("User updated:", user);
+      navigate("/");
+      setSuccess(true);
+    } catch (error) {
+      setErrormessage(error.message);
+      setSuccess(false);
+    }
   };
   return (
     <div className="min-h-screen flex justify-center items-center">
