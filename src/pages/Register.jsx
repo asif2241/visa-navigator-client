@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Components/Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createNewUser, setUser } = useContext(AuthContext);
@@ -10,20 +11,17 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
 
   // ✅ Use useEffect to show toast only when success changes
-  // useEffect(() => {
-  //   if (success) {
-  //     toast.success("SignUp Successful!", {
-  //       position: "top-center",
-  //       autoClose: 5000,
-  //       hideProgressBar: false,
-  //       closeOnClick: false,
-  //       pauseOnHover: true,
-  //       draggable: true,
-  //       progress: undefined,
-  //       theme: "colored",
-  //     });
-  //   }
-  // }, [success]);
+  useEffect(() => {
+    if (success) {
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Register Successfull",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  }, [success]);
   // Runs only when `success` updates
 
   const handleSubmit = async (e) => {
@@ -125,9 +123,9 @@ const Register = () => {
 
         <p className="text-center font-semibold">
           Allready Have An Account ?{" "}
-          {/* <Link className="text-red-500" to="/login">
+          <Link className="text-red-500" to="/login">
             Login
-          </Link> */}
+          </Link>
         </p>
       </div>
     </div>
