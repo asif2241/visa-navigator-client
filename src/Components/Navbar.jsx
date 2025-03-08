@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logopng from "../../src/assets/freepik-gradient-sunrise-travel-agency-logo-20250303125922qPbn.png";
-
+import userIcon from "../../src/assets/user.png";
+import { AuthContext } from "./Provider/AuthProvider";
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
   const links = (
     <>
       <NavLink
@@ -72,9 +74,25 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <Link to={"/register"} className="btn">
-            Register
-          </Link>
+          {user && user.photoURL ? (
+            <img
+              className="w-10 rounded-full mr-2"
+              src={user.photoURL}
+              alt=""
+            />
+          ) : (
+            <img className="mr-2" src={userIcon} alt="" />
+          )}
+
+          {user && user.email ? (
+            <button onClick={logOut} to={"/login"} className="btn">
+              Log Out
+            </button>
+          ) : (
+            <Link to={"/login"} className="btn">
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>
