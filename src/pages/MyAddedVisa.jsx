@@ -38,7 +38,12 @@ const MyAddedVisa = () => {
 
             <div className="card-actions justify-end "></div>
             <div className="flex justify-between">
-              <Link className="btn btn-primary font-light">Update</Link>
+              <Link
+                to={`/update_visa/${visa._id}`}
+                className="btn btn-primary font-light"
+              >
+                Update
+              </Link>
               <Link className="btn btn-primary font-light">Delete</Link>
             </div>
           </div>

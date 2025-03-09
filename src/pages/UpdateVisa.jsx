@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Provider/AuthProvider";
-import Loading from "./Loding";
-import Swal from "sweetalert2";
+import { useLoaderData } from "react-router-dom";
 
-const AddVisa = () => {
+const UpdateVisa = () => {
+  const data = useLoaderData();
+  console.log(data);
   const { user, loading } = useContext(AuthContext);
   //  Private route e loading set korar age korechi tai evbabe korlam, loading set korar por korle evabe korar drkar hoitw na
   const [name, setName] = useState("");
@@ -13,7 +14,7 @@ const AddVisa = () => {
       setName(name);
     }
   }, [loading, name, user]);
-  console.log(name);
+  //   console.log(name);
 
   const [requiredDocs, setRequiredDocs] = useState([]);
   const handleRequiredDocs = (e) => {
@@ -26,7 +27,7 @@ const AddVisa = () => {
       ]);
     }
   };
-  console.log(requiredDocs);
+  //   console.log(requiredDocs);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,27 +55,7 @@ const AddVisa = () => {
       required_docs,
       name,
     };
-    console.log(addedVisa);
-
-    fetch("http://localhost:5000/visa", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(addedVisa),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            position: "top",
-            icon: "success",
-            title: "Visa Added To DB",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+    // console.log(addedVisa);
   };
   return (
     <div>
@@ -85,21 +66,27 @@ const AddVisa = () => {
         >
           <input
             type="text"
+            defaultValue={data.countryImg}
             name="countryImg"
             placeholder="Country Image"
             className="input input-xl w-full"
           />
           <input
             type="text"
+            defaultValue={data.countryName}
             name="countryName"
             placeholder="Country Name"
             className="input input-xl w-full"
           />
           <select
             name="visaType"
+            defaultValue={data.visaType}
             className="input input-xl w-full text-gray-400"
           >
-            <option value="">Visa Type...</option> {/* Acts as a placeholder */}
+            <option value="" disabled>
+              Visa Type...
+            </option>{" "}
+            {/* Acts as a placeholder */}
             <option value="Tourist">Tourist</option>
             <option value="Student">Student</option>
             <option value="Official">Officiaa</option>
@@ -109,33 +96,40 @@ const AddVisa = () => {
           </select>
           <input
             type="text"
+            defaultValue={data.processingTime}
             name="processingTime"
             placeholder="Processing Time"
             className="input input-xl w-full"
           />
           <input
             type="text"
+            defaultValue={data.ageRestriction}
             name="ageRestriction"
             placeholder="Age Restriction"
             className="input input-xl w-full"
           />
           <input
             name="fee"
+            defaultValue={data.fee}
             type="number"
             placeholder="Fee"
             className="input input-xl w-full"
           />
           <input
+            defaultValue={data.validity}
             name="validity"
             type="text"
             placeholder="Validity"
             className="input input-xl w-full"
           />
           <select
+            defaultValue={data.applicationMethod}
             name="applicationMethod"
             className="input input-xl w-full text-gray-400"
           >
-            <option value="">Application Method...</option>{" "}
+            <option value="" disabled>
+              Application Method...
+            </option>{" "}
             {/* Acts as a placeholder */}
             <option value="Online">Online</option>
             <option value="Offline">Offline</option>
@@ -144,6 +138,7 @@ const AddVisa = () => {
             </option>
           </select>
           <textarea
+            defaultValue={data.description}
             name="description"
             className="textarea col-span-2 w-full"
             placeholder="Description"
@@ -182,4 +177,4 @@ const AddVisa = () => {
   );
 };
 
-export default AddVisa;
+export default UpdateVisa;
