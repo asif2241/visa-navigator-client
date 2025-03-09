@@ -39,7 +39,7 @@ const Navbar = () => {
         Add Visa
       </NavLink>
       <NavLink
-        to={`/all_visa/user/${user?.displayName}`}
+        to={`/all-visa/user/${user?.displayName}`}
         className={({ isActive }) =>
           isActive
             ? "   font-semibold text-lg  bg-white text-green-400 mr-2"

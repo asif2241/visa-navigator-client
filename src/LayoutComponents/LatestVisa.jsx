@@ -53,7 +53,7 @@ const LatestVisa = () => {
             <h2 className="card-title font-medium">
               Validity: {visa.validity}
             </h2>
-            <h2 className="card-title font-medium">Fee: {visa.fee}</h2>
+            <h2 className="card-title font-medium">Fee: {visa.fee}$</h2>
             <h2 className="card-title font-medium">
               Processing Time: {visa.processingTime}
             </h2>
