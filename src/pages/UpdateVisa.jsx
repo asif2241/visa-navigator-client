@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Provider/AuthProvider";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateVisa = () => {
   const data = useLoaderData();
@@ -42,7 +43,7 @@ const UpdateVisa = () => {
     const applicationMethod = form.applicationMethod.value;
     const description = form.description.value;
     const required_docs = requiredDocs;
-    const addedVisa = {
+    const updatedVisa = {
       countryImg,
       countryName,
       visaType,
@@ -56,6 +57,27 @@ const UpdateVisa = () => {
       name,
     };
     // console.log(addedVisa);
+
+    fetch(`http://localhost:5000/all-visa/${data._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedVisa),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.modifiedCount) {
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "Visa Updated Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
   return (
     <div>
