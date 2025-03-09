@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Provider/AuthProvider";
 import Loading from "./Loding";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddVisa = () => {
   const { user, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
   //  Private route e loading set korar age korechi tai evbabe korlam, loading set korar por korle evabe korar drkar hoitw na
   const [name, setName] = useState("");
   useEffect(() => {
@@ -73,6 +75,7 @@ const AddVisa = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/all_visa");
         }
       });
   };

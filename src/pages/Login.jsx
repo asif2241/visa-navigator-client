@@ -40,7 +40,7 @@ const Login = () => {
           timer: 1500,
         });
 
-        // navigate("/");
+        navigate("/");
       })
       .catch((error) => {
         setSuccess(false);

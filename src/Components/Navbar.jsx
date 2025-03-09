@@ -38,16 +38,30 @@ const Navbar = () => {
       >
         Add Visa
       </NavLink>
-      <NavLink
-        to={`/all-visa/user/${user?.displayName}`}
-        className={({ isActive }) =>
-          isActive
-            ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
-            : "mr-2  bg-transparent r font-semibold text-lg"
-        }
-      >
-        My Added Visa
-      </NavLink>
+      {user && (
+        <>
+          <NavLink
+            to={`/all-visa/user/${user?.displayName}`}
+            className={({ isActive }) =>
+              isActive
+                ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
+                : "mr-2  bg-transparent r font-semibold text-lg"
+            }
+          >
+            My Added Visa
+          </NavLink>
+          <NavLink
+            to={`/my_visa_application`}
+            className={({ isActive }) =>
+              isActive
+                ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
+                : "mr-2  bg-transparent r font-semibold text-lg"
+            }
+          >
+            My Visa Application
+          </NavLink>
+        </>
+      )}
     </>
   );
   return (
@@ -87,7 +101,7 @@ const Navbar = () => {
         <div className="navbar-end">
           {user && user.photoURL ? (
             <img
-              className="w-10 rounded-full mr-2"
+              className="w-10 object-cover rounded-full mr-2"
               src={user.photoURL}
               alt=""
             />
@@ -100,9 +114,14 @@ const Navbar = () => {
               Log Out
             </button>
           ) : (
-            <Link to={"/login"} className="btn">
-              Login
-            </Link>
+            <>
+              <Link to={"/login"} className="btn btn-ghost">
+                Login
+              </Link>
+              <Link to={"/register"} className="btn btn-ghost">
+                Register
+              </Link>
+            </>
           )}
         </div>
       </div>
