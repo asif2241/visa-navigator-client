@@ -6,6 +6,7 @@ import AllVisa from "./pages/AllVisa";
 import VisaDetails from "./pages/VisaDetails";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import MyAddedVisa from "./pages/MyAddedVisa";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: `/all_visa/user/:name`,
+        element: <MyAddedVisa></MyAddedVisa>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/all-visa/user/${params.name}`),
       },
     ],
   },

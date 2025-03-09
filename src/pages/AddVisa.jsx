@@ -1,6 +1,18 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Components/Provider/AuthProvider";
+import Loading from "./Loding";
 
 const AddVisa = () => {
+  const { user, loading } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  useEffect(() => {
+    if (!loading) {
+      const name = user?.displayName;
+      setName(name);
+    }
+  }, [loading, name, user]);
+  console.log(name);
+
   const [requiredDocs, setRequiredDocs] = useState([]);
   const handleRequiredDocs = (e) => {
     // console.log(e.target.value, e.target.checked);
@@ -38,6 +50,7 @@ const AddVisa = () => {
       applicationMethod,
       description,
       required_docs,
+      name,
     };
     console.log(addedVisa);
 

@@ -1,34 +1,49 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Components/Provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { userLogin, signInWithGoogle, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [success, setSuccess] = useState(false);
+
+  // useEffect(() => {
+  //   if (success) {
+  //     Swal.fire({
+  //       position: "top",
+  //       icon: "success",
+  //       title: "Register Successfull",
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //   }
+  // }, [success]);
 
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+
+    setSuccess(false);
     // console.log(password, email);
 
     userLogin(email, password)
       .then((res) => {
         setUser(res.user);
-        toast.success("Login Successful!", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
+        setSuccess(true);
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: "Login Successful",
+          showConfirmButton: false,
+          timer: 1500,
         });
-        navigate("/");
+
+        // navigate("/");
       })
       .catch((error) => {
+        setSuccess(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         // console.log(errorCode, errorMessage);

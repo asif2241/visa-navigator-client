@@ -5,6 +5,7 @@ import userIcon from "../../src/assets/user.png";
 import { AuthContext } from "./Provider/AuthProvider";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  console.log(user);
   const links = (
     <>
       <NavLink
@@ -36,6 +37,16 @@ const Navbar = () => {
         }
       >
         Add Visa
+      </NavLink>
+      <NavLink
+        to={`/all_visa/user/${user?.displayName}`}
+        className={({ isActive }) =>
+          isActive
+            ? "   font-semibold text-lg  bg-white text-green-400 mr-2"
+            : "mr-2  bg-transparent r font-semibold text-lg"
+        }
+      >
+        My Added Visa
       </NavLink>
     </>
   );
