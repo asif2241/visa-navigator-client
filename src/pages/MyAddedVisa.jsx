@@ -1,12 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyAddedVisa = () => {
   const data = useLoaderData();
+  const [visas, setVisas] = useState(data);
   console.log(data);
+
+  const handleDelete = (_id) => {
+    console.log(_id);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform delete operation only if confirmed
+        fetch(`http://localhost:5000/all-visa/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your visa has been deleted.",
+                icon: "success",
+              });
+
+              // Remove visa from the state
+              const remaining = visas.filter((visa) => visa._id !== _id);
+              setVisas(remaining);
+            }
+          });
+      }
+    });
+  };
+
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 w-4/5 mx-auto my-10">
-      {data.map((visa) => (
+      {visas.map((visa) => (
         <div
           key={visa._id}
           className="card bg-base-100 shadow-sm max-w-[490px]"
@@ -44,7 +82,12 @@ const MyAddedVisa = () => {
               >
                 Update
               </Link>
-              <Link className="btn btn-primary font-light">Delete</Link>
+              <Link
+                onClick={() => handleDelete(visa._id)}
+                className="btn btn-primary font-light"
+              >
+                Delete
+              </Link>
             </div>
           </div>
         </div>
