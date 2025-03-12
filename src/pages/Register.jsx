@@ -40,21 +40,21 @@ const Register = () => {
 
     // password validation
 
-    //   const hasUppercase = /[A-Z]/.test(password);
-    //   const hasLowercase = /[a-z]/.test(password);
-    //   const hasMinLength = /^.{6,}$/.test(password);
-    // if(!hasUppercase){
-    //   setErrormessage("The Password Must Contain Atleast 1 Uppercase Letter");
-    //   return
-    // }
-    // if(!hasLowercase){
-    //   setErrormessage("The Password Must Contain Atleast 1 Lowercase Letter");
-    //   return
-    // }
-    // if(!hasMinLength){
-    //   setErrormessage("The Password Must Contain Atleast 6 Letters");
-    //   return
-    // }
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasMinLength = /^.{6,}$/.test(password);
+    if (!hasUppercase) {
+      setErrormessage("The Password Must Contain Atleast 1 Uppercase Letter");
+      return;
+    }
+    if (!hasLowercase) {
+      setErrormessage("The Password Must Contain Atleast 1 Lowercase Letter");
+      return;
+    }
+    if (!hasMinLength) {
+      setErrormessage("The Password Must Contain Atleast 6 Letters");
+      return;
+    }
 
     try {
       // Create user
@@ -69,7 +69,7 @@ const Register = () => {
 
       // Successfully updated user profile
       setUser({ ...user, displayName: name, photoURL: photo });
-      console.log("User updated:", user);
+      // console.log("User updated:", user);
       navigate("/");
       setSuccess(true);
     } catch (error) {

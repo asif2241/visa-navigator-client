@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const AllVisa = () => {
   const allVisa = useLoaderData();
-  console.log(allVisa);
+  // console.log(allVisa);
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 md:w-4/5 w-11/12 mx-auto">
       {allVisa.map((visa) => (

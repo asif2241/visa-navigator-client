@@ -1,4 +1,5 @@
 import { Fade } from "react-awesome-reveal";
+import whyChooseImg from "../../src/assets/freepik__upload__73017.jpeg";
 
 const WhyChooseUs = () => {
   return (
@@ -45,11 +46,7 @@ const WhyChooseUs = () => {
 
           {/* img  */}
           <div className=" lg:w-[50%] w-full  flex items-center">
-            <img
-              className="w-full lg:rounded-2xl"
-              src="../../src/assets/freepik__upload__73017.jpeg"
-              alt=""
-            />
+            <img className="w-full lg:rounded-2xl" src={whyChooseImg} alt="" />
           </div>
         </div>
       </div>

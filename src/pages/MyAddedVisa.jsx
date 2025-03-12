@@ -5,10 +5,10 @@ import Swal from "sweetalert2";
 const MyAddedVisa = () => {
   const data = useLoaderData();
   const [visas, setVisas] = useState(data);
-  console.log(data);
+  // console.log(data);
 
   const handleDelete = (_id) => {
-    console.log(_id);
+    // console.log(_id);
 
     Swal.fire({
       title: "Are you sure?",
@@ -21,7 +21,7 @@ const MyAddedVisa = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform delete operation only if confirmed
-        fetch(`http://localhost:5000/all-visa/${_id}`, {
+        fetch(`https://visa-navigator-server-one.vercel.app/all-visa/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

@@ -15,7 +15,7 @@ const AddVisa = () => {
       setName(name);
     }
   }, [loading, name, user]);
-  console.log(name);
+  // console.log(name);
 
   const [requiredDocs, setRequiredDocs] = useState([]);
   const handleRequiredDocs = (e) => {
@@ -28,7 +28,7 @@ const AddVisa = () => {
       ]);
     }
   };
-  console.log(requiredDocs);
+  // console.log(requiredDocs);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,9 +56,9 @@ const AddVisa = () => {
       required_docs,
       name,
     };
-    console.log(addedVisa);
+    // console.log(addedVisa);
 
-    fetch("http://localhost:5000/visa", {
+    fetch("https://visa-navigator-server-one.vercel.app/visa", {
       method: "POST",
       headers: {
         "content-type": "application/json",

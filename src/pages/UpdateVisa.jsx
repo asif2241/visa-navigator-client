@@ -58,7 +58,7 @@ const UpdateVisa = () => {
     };
     // console.log(addedVisa);
 
-    fetch(`http://localhost:5000/all-visa/${data._id}`, {
+    fetch(`https://visa-navigator-server-one.vercel.app/all-visa/${data._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

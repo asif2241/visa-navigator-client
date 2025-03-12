@@ -2,7 +2,7 @@ import { Link, useRouteError } from "react-router-dom";
 
 const ErrorPage = () => {
   const error = useRouteError();
-  console.error(error); // Log the error for debugging
+  //   console.error(error); // Log the error for debugging
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 p-5 text-center">

@@ -34,12 +34,15 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-visa/${params.id}`),
+          fetch(
+            `https://visa-navigator-server-one.vercel.app/all-visa/${params.id}`
+          ),
       },
       {
         path: "/all_visa",
         element: <AllVisa></AllVisa>,
-        loader: () => fetch("http://localhost:5000/all-visa"),
+        loader: () =>
+          fetch("https://visa-navigator-server-one.vercel.app/all-visa"),
       },
       {
         path: "/register",
@@ -57,13 +60,17 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-visa/user/${params.name}`),
+          fetch(
+            `https://visa-navigator-server-one.vercel.app/all-visa/user/${params.name}`
+          ),
       },
       {
         path: `/update_visa/:id`,
         element: <UpdateVisa></UpdateVisa>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/all-visa/${params.id}`),
+          fetch(
+            `https://visa-navigator-server-one.vercel.app/all-visa/${params.id}`
+          ),
       },
       {
         path: "/my_visa_application",
